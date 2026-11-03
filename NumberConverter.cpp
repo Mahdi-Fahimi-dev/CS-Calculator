@@ -36,44 +36,21 @@ void NumberConverter::run() {
 
         // Decimal to binary
         if (optionNumber == 1) {
-            std::cout<< std::endl;
-            std::cout << "Decimal to Binary Selected\n";
             
             std::string decimalInput;
             std::cout << "Enter a non-negative integer: ";
             std::cin >> decimalInput;
 
-            if (!isNonNegativeInteger(decimalInput)) {
+            std::string result = decimalToBinary(decimalInput);
+
+            if (result == "Invalid input!" || result == "Number is too large!") {
                 std::cout << std::endl;
-                std::cout << "Invalid input!\n";
+                std::cout << result << std::endl;
                 continue;
             }
 
-            unsigned long long decToBinary;
-            if (!parseUnsignedInteger(decimalInput, decToBinary)) {
-                std::cout << std::endl;
-                std::cout << "Number is too large!\n";
-                continue;
-            }
-
-            if (decToBinary == 0) {
-                std::cout << "0\n";
-                continue;
-            }
-
-            std::vector<int> binary;
-
-            while(decToBinary > 0) {
-                int remainder;
-                remainder = decToBinary % 2;
-                binary.push_back(remainder);
-                decToBinary = decToBinary / 2;
-            }
-            std::cout << "Decimal (" << decimalInput << ") to binary is: ";
-            for (int i = binary.size() - 1; i >= 0; i--) {
-                std::cout << binary[i];
-            }
-            std::cout << std::endl;
+            std::cout << "Decimal (" << decimalInput << ") to binary is: "
+                    << result << std::endl;
         
         // Binary to decimal
         } else if (optionNumber == 2) {
@@ -368,4 +345,37 @@ void NumberConverter::run() {
 
     }
 
+}
+
+std::string NumberConverter::decimalToBinary(const std::string& input) {
+
+    if (!isNonNegativeInteger(input)) {
+        return "Invalid input!";
+    }
+
+    unsigned long long decimal;
+
+    if (!parseUnsignedInteger(input, decimal)) {
+        return "Number is too large!";
+    }
+
+    if (decimal == 0) {
+        return "0";
+    }
+
+    std::vector<int> binary;
+
+    while (decimal > 0) {
+        int remainder = decimal % 2;
+        binary.push_back(remainder);
+        decimal = decimal / 2;
+    }
+
+    std::string result;
+
+    for (int i = binary.size() - 1; i >= 0; i--) {
+        result += '0' + binary[i];
+    }
+
+    return result;
 }

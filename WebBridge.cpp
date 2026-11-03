@@ -1,0 +1,29 @@
+#include <emscripten/bind.h>
+#include "BasicCalculator.h"
+#include "NumberConverter.h"
+#include <string>
+
+int testConnection() {
+    return 42;
+}
+
+std::string calculateBasic(double firstNumber, std::string operation, double secondNumber) {
+    BasicCalculator calculator;
+
+    if (operation.empty()) {
+        return "Invalid Operation";
+    }
+
+    return calculator.calculate(firstNumber, operation[0], secondNumber);
+}
+
+std::string convertDecimalToBinary(const std::string& input) {
+    NumberConverter converter;
+    return converter.decimalToBinary(input);
+}
+
+EMSCRIPTEN_BINDINGS(cs_calculator) {
+    emscripten::function("testConnection", &testConnection);
+    emscripten::function("calculateBasic", &calculateBasic);
+    emscripten::function("convertDecimalToBinary", &convertDecimalToBinary);
+}

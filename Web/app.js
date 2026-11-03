@@ -3,6 +3,12 @@ const basicButton = document.getElementById("basic-button");
 const basicCalculator = document.getElementById("basic-calculator");
 const backButton = document.getElementById("back-button");
 
+const firstNumberInput = document.getElementById("first-number");
+const operatorInput = document.getElementById("operator");
+const secondNumberInput = document.getElementById("second-number");
+const calculateButton = document.getElementById("calculate-button");
+const basicResult = document.getElementById("result");
+
 /* Number System Converter */
 const converterButton = document.getElementById("converter-button");
 const converter = document.getElementById("converter");
@@ -10,6 +16,9 @@ const converterBackButton = document.getElementById("converter-back-button");
 
 const conversionType = document.getElementById("conversion-type");
 const conversionInput = document.getElementById("conversion-input");
+
+const convertButton = document.getElementById("convert-button");
+const conversionResult = document.getElementById("conversion-result");
 
 /* Bitwise Calculator */
 const bitwiseButton = document.getElementById("bitwise-button");
@@ -25,6 +34,7 @@ const bitwiseFirstInput = document.getElementById("bitwise-first-input");
 const twosButton = document.getElementById("twos-button");
 const twosComplement = document.getElementById("twos-complement");
 const twosBackButton = document.getElementById("twos-back-button");
+
 
 /* Basic Calculator */
 basicButton.addEventListener("click", function () {
@@ -70,6 +80,13 @@ conversionType.addEventListener("change", function () {
     }
 });
 
+convertButton.addEventListener("click", function () {
+    if (conversionType.value === "decimal-binary") {
+        conversionResult.textContent =
+            Module.convertDecimalToBinary(conversionInput.value.trim());
+    }
+});
+
 /* Bitwise Calculator */
 bitwiseButton.addEventListener("click", function () {
     document.querySelector(".main-menu").hidden = true;
@@ -111,4 +128,25 @@ twosButton.addEventListener("click", function () {
 twosBackButton.addEventListener("click", function () {
     twosComplement.hidden = true;
     document.querySelector(".main-menu").hidden = false;
+});
+
+calculateButton.addEventListener("click", function () {
+    const firstNumber = firstNumberInput.value.trim();
+    const secondNumber = secondNumberInput.value.trim();
+
+    if (firstNumber === "" || secondNumber === "") {
+        basicResult.value = "Please enter both numbers.";
+        return;
+    }
+
+    const first = Number(firstNumber);
+    const second = Number(secondNumber);
+
+    if (Number.isNaN(first) || Number.isNaN(second)) {
+        basicResult.value = "Invalid input!";
+        return;
+    }
+
+    basicResult.value =
+        Module.calculateBasic(first, operatorInput.value, second);
 });
