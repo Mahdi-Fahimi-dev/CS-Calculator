@@ -22,8 +22,14 @@ std::string convertDecimalToBinary(const std::string& input) {
     return converter.decimalToBinary(input);
 }
 
+std::string convertBinaryToDecimal(const std::string& input) {
+    NumberConverter converter;
+    return converter.binaryToDecimal(input);
+}
+
 EMSCRIPTEN_BINDINGS(cs_calculator) {
     emscripten::function("testConnection", &testConnection);
     emscripten::function("calculateBasic", &calculateBasic);
     emscripten::function("convertDecimalToBinary", &convertDecimalToBinary);
+    emscripten::function("convertBinaryToDecimal", &convertBinaryToDecimal);
 }

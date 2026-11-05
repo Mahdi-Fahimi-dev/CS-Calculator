@@ -50,7 +50,7 @@ void NumberConverter::run() {
             }
 
             std::cout << "Decimal (" << decimalInput << ") to binary is: "
-                    << result << std::endl;
+                << result << std::endl;
         
         // Binary to decimal
         } else if (optionNumber == 2) {
@@ -60,32 +60,16 @@ void NumberConverter::run() {
             std::cout << "Enter a binary number: ";
             std::cin >> binary;
 
-            if (!isBinary(binary)) {
-                std::cout << std::endl;
-                std::cout << "Invalid binary number!\n";
-                continue;
-            }
+            std::string result = binaryToDecimal(binary);
 
-            unsigned long long result = 0;
-            unsigned long long maxValue = std::numeric_limits<unsigned long long>::max();
-
-            bool binaryOverflow = false;
-            for (int i = 0; i < binary.size(); i++) {
-                int digitValue = binary[i] - '0';
-
-                if (result > (maxValue - digitValue) / 2) {
-                    std::cout << std::endl;
-                    std::cout << "Number is too large!\n";
-                    binaryOverflow = true;
-                    break;
-                }
-                result = (result * 2) + digitValue;
-            }
-            if (binaryOverflow) {
-                continue;
-            }
-            std::cout << "Binary (" << binary << ") to decimal is: ";
+        if (result == "Invalid binary number!" || result == "Number is too large!") {
+            std::cout << std::endl;
             std::cout << result << std::endl;
+            continue;
+        }
+
+        std::cout << "Binary (" << binary << ") to decimal is: "
+            << result << std::endl;
 
         // Decimal to hexadecimal
         } else if (optionNumber == 3) {
@@ -378,4 +362,27 @@ std::string NumberConverter::decimalToBinary(const std::string& input) {
     }
 
     return result;
+}
+
+std::string NumberConverter::binaryToDecimal(const std::string& input) {
+
+    if (!isBinary(input)) {
+        return "Invalid binary number!";
+    }
+
+    unsigned long long result = 0;
+    unsigned long long maxValue =
+        std::numeric_limits<unsigned long long>::max();
+
+    for (int i = 0; i < input.size(); i++) {
+        int digitValue = input[i] - '0';
+
+        if (result > (maxValue - digitValue) / 2) {
+            return "Number is too large!";
+        }
+
+        result = (result * 2) + digitValue;
+    }
+
+    return std::to_string(result);
 }

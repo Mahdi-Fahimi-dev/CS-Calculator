@@ -82,8 +82,11 @@ conversionType.addEventListener("change", function () {
 
 convertButton.addEventListener("click", function () {
     if (conversionType.value === "decimal-binary") {
-        conversionResult.textContent =
+        conversionResult.value =
             Module.convertDecimalToBinary(conversionInput.value.trim());
+    } else if (conversionType.value === "binary-decimal") {
+        conversionResult.value =
+            Module.convertBinaryToDecimal(conversionInput.value.trim());
     }
 });
 
