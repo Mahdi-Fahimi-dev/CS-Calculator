@@ -1,5 +1,10 @@
 body {
     text-align: center;     /*Centres the text*/
+    background-image: url("images/background1.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 .main-menu {
@@ -41,4 +46,14 @@ button {
 #bitwise-first-input,
 #bitwise-second-input {
     width: 180px;
+}
+
+h1 {
+    color: white;
+    text-shadow: 2px 2px 4px black;
+}
+
+h2 {
+    color: white;
+    text-shadow: 2px 2px 4px black;
 }
