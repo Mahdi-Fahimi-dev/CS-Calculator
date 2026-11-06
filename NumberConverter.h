@@ -7,6 +7,7 @@ public:
     void run();
     std::string decimalToBinary(const std::string& input);
     std::string binaryToDecimal(const std::string& input);
+    std::string decimalToHexadecimal(const std::string& input);
 
 };
 

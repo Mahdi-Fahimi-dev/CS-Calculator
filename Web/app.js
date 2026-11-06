@@ -87,6 +87,9 @@ convertButton.addEventListener("click", function () {
     } else if (conversionType.value === "binary-decimal") {
         conversionResult.value =
             Module.convertBinaryToDecimal(conversionInput.value.trim());
+    } else if (conversionType.value === "decimal-hex") {
+        conversionResult.value =
+            Module.convertDecimalToHexadecimal(conversionInput.value.trim());
     }
 });
 

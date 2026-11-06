@@ -27,9 +27,15 @@ std::string convertBinaryToDecimal(const std::string& input) {
     return converter.binaryToDecimal(input);
 }
 
+std::string convertDecimalToHexadecimal(const std::string& input) {
+    NumberConverter converter;
+    return converter.decimalToHexadecimal(input);
+}
+
 EMSCRIPTEN_BINDINGS(cs_calculator) {
     emscripten::function("testConnection", &testConnection);
     emscripten::function("calculateBasic", &calculateBasic);
     emscripten::function("convertDecimalToBinary", &convertDecimalToBinary);
     emscripten::function("convertBinaryToDecimal", &convertBinaryToDecimal);
+    emscripten::function("convertDecimalToHexadecimal", &convertDecimalToHexadecimal);
 }

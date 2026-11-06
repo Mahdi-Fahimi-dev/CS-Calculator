@@ -80,46 +80,16 @@ void NumberConverter::run() {
             std::cout << "Enter a non-negative integer: ";
             std::cin >> nonNegativeNum1;
 
-            if (!isNonNegativeInteger(nonNegativeNum1)) {
+            std::string result = decimalToHexadecimal(nonNegativeNum1);
+
+            if (result == "Invalid input!" || result == "Number is too large!") {
                 std::cout << std::endl;
-                std::cout << "Invalid input!\n";
+                std::cout << result << std::endl;
                 continue;
             }
 
-            unsigned long long convertedString;
-            if (!parseUnsignedInteger(nonNegativeNum1, convertedString)) {
-                std::cout << std::endl;
-                std::cout << "Number is too large!\n";
-                continue;
-            }
-
-            unsigned long long dec = convertedString;
-
-            std::vector <char> hexDecimal;
-
-            if (convertedString == 0) {
-            std::cout << "0\n";
-            continue;
-            }
-            while(convertedString > 0) {
-                int remainder1;
-                remainder1 = convertedString % 16;
-                convertedString = convertedString / 16;
-
-                char character;
-                if (remainder1 < 10) {
-                    character = '0' + remainder1;
-                } else {
-                    character = 'A' + (remainder1 - 10);
-                }
-
-                hexDecimal.push_back(character);
-            }
-            std::cout << "The decimal (" << dec << ") to hexadecimal is: 0x";
-            for (int i = hexDecimal.size() - 1; i >= 0; i--) {
-                std::cout << hexDecimal[i];
-            }
-            std::cout << std::endl; 
+            std::cout << "The decimal (" << nonNegativeNum1
+                << ") to hexadecimal is: " << result << std::endl;
 
         // Hexadecimal to decimal
         } else if (optionNumber == 4) {
@@ -385,4 +355,46 @@ std::string NumberConverter::binaryToDecimal(const std::string& input) {
     }
 
     return std::to_string(result);
+}
+
+std::string NumberConverter::decimalToHexadecimal(const std::string& input) {
+
+    if (!isNonNegativeInteger(input)) {
+        return "Invalid input!";
+    }
+
+    unsigned long long decimal;
+
+    if (!parseUnsignedInteger(input, decimal)) {
+        return "Number is too large!";
+    }
+
+    if (decimal == 0) {
+        return "0";
+    }
+
+    std::vector<char> hexadecimal;
+
+    while (decimal > 0) {
+        int remainder = decimal % 16;
+        decimal = decimal / 16;
+
+        char character;
+
+        if (remainder < 10) {
+            character = '0' + remainder;
+        } else {
+            character = 'A' + (remainder - 10);
+        }
+
+        hexadecimal.push_back(character);
+    }
+
+    std::string result = "0x";
+
+    for (int i = hexadecimal.size() - 1; i >= 0; i--) {
+        result += hexadecimal[i];
+    }
+
+    return result;
 }
