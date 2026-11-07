@@ -90,6 +90,12 @@ convertButton.addEventListener("click", function () {
     } else if (conversionType.value === "decimal-hex") {
         conversionResult.value =
             Module.convertDecimalToHexadecimal(conversionInput.value.trim());
+    } else if (conversionType.value === "hex-decimal") {
+        conversionResult.value =
+            Module.convertHexadecimalToDecimal(conversionInput.value.trim());
+    } else if (conversionType.value === "decimal-octal") {
+        conversionResult.value =
+            Module.convertDecimalToOctal(conversionInput.value.trim());
     }
 });
 

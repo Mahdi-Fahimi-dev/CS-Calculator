@@ -99,58 +99,16 @@ void NumberConverter::run() {
             std::string hexa;
             std::cin >> hexa;
 
-            bool validHexaToDecimal = true;
+            std::string result = hexadecimalToDecimal(hexa);
 
-            // validation for hexadecimal number
-            for (int i = 0; i < hexa.size(); i++) {
-                if (!((hexa[i] >= '0' && hexa[i] <= '9') || (hexa[i] >= 'A' && hexa[i] <= 'F') || (hexa[i] >= 'a' && hexa[i] <= 'f'))) {
-                    std::cout << std::endl;
-                    std::cout << "Invalid hexadecimal number!\n";
-                    validHexaToDecimal = false;
-                    break;
-                }
-            }
-            if (!validHexaToDecimal) {
+            if (result == "Invalid hexadecimal number!" || result == "Number is too large!") {
+                std::cout << std::endl;
+                std::cout << result << std::endl;
                 continue;
             }
 
-            unsigned long long hexToDecResult = 0;
-            unsigned long long maxValue = std::numeric_limits<unsigned long long>::max();
-
-            bool hexOverflow = false;
-
-            for (int i = 0; i < hexa.size(); i++) {
-                int digitValue;
-                if (hexa[i] >= '0' && hexa[i] <= '9') {
-                    digitValue = hexa[i] - '0';
-                } else if (hexa[i] == 'A' || hexa[i] == 'a') {
-                    digitValue = 10;
-                } else if (hexa[i] == 'B' || hexa[i] == 'b') {
-                    digitValue = 11;
-                } else if (hexa[i] == 'C' || hexa[i] == 'c') {
-                    digitValue = 12;
-                } else if (hexa[i] == 'D' || hexa[i] == 'd') {
-                    digitValue = 13;
-                } else if (hexa[i] == 'E' || hexa[i] == 'e') {
-                    digitValue = 14;
-                } else {
-                    digitValue = 15;
-                }
-
-                if (hexToDecResult > (maxValue - digitValue) / 16) {
-                    std::cout << std::endl;
-                    std::cout << "Number is too large!\n";
-                    hexOverflow = true;
-                    break;
-                }
-                hexToDecResult = (hexToDecResult * 16) + digitValue;
-            }
-            if (hexOverflow) {
-                continue;
-            }
-            std::cout << "Hexadecimal (" << hexa << ") to decimal is: ";
-            std::cout << hexToDecResult;
-            std::cout << std::endl;
+            std::cout << "Hexadecimal (" << hexa << ") to decimal is: "
+                << result << std::endl;
         
         // Decimal to Octal
         } else if (optionNumber == 5) {
@@ -160,37 +118,16 @@ void NumberConverter::run() {
             std::cout << "Enter a non-negative integer: ";
             std::cin >> decNum;
 
-            if (!isNonNegativeInteger(decNum)) {
+            std::string result = decimalToOctal(decNum);
+
+            if (result == "Invalid input!" || result == "Number is too large!") {
                 std::cout << std::endl;
-                std::cout << "Invalid input!\n";
+                std::cout << result << std::endl;
                 continue;
             }
 
-            unsigned long long decToOc;
-            if (!parseUnsignedInteger(decNum, decToOc)) {
-                std::cout << std::endl;
-                std::cout << "Number is too large!\n";
-                continue;
-            }
-
-            if (decToOc == 0) {
-                std::cout << "0\n";
-                continue;
-            }
-
-            std::vector<int> octal;
-
-            while (decToOc > 0) {
-                int remainderResult;
-                remainderResult = decToOc % 8;
-                octal.push_back(remainderResult);
-                decToOc = decToOc / 8;
-            }
-
-            for (int i = octal.size() -1 ; i >= 0; i--) {
-                std::cout << octal[i];
-            }
-            std::cout << std::endl;
+            std::cout << "Decimal (" << decNum << ") to octal is: "
+                << result << std::endl;
 
         // Binary to Octal
         } else if (optionNumber == 6) {
@@ -394,6 +331,83 @@ std::string NumberConverter::decimalToHexadecimal(const std::string& input) {
 
     for (int i = hexadecimal.size() - 1; i >= 0; i--) {
         result += hexadecimal[i];
+    }
+
+    return result;
+}
+
+std::string NumberConverter::hexadecimalToDecimal(const std::string& input) {
+
+    // Validate hexadecimal number
+    for (int i = 0; i < input.size(); i++) {
+        if (!((input[i] >= '0' && input[i] <= '9') ||
+              (input[i] >= 'A' && input[i] <= 'F') ||
+              (input[i] >= 'a' && input[i] <= 'f'))) {
+            return "Invalid hexadecimal number!";
+        }
+    }
+
+    unsigned long long result = 0;
+    unsigned long long maxValue =
+        std::numeric_limits<unsigned long long>::max();
+
+    for (int i = 0; i < input.size(); i++) {
+        int digitValue;
+
+        if (input[i] >= '0' && input[i] <= '9') {
+            digitValue = input[i] - '0';
+        } else if (input[i] == 'A' || input[i] == 'a') {
+            digitValue = 10;
+        } else if (input[i] == 'B' || input[i] == 'b') {
+            digitValue = 11;
+        } else if (input[i] == 'C' || input[i] == 'c') {
+            digitValue = 12;
+        } else if (input[i] == 'D' || input[i] == 'd') {
+            digitValue = 13;
+        } else if (input[i] == 'E' || input[i] == 'e') {
+            digitValue = 14;
+        } else {
+            digitValue = 15;
+        }
+
+        if (result > (maxValue - digitValue) / 16) {
+            return "Number is too large!";
+        }
+
+        result = (result * 16) + digitValue;
+    }
+
+    return std::to_string(result);
+}
+
+std::string NumberConverter::decimalToOctal(const std::string& input) {
+
+    if (!isNonNegativeInteger(input)) {
+        return "Invalid input!";
+    }
+
+    unsigned long long decimal;
+
+    if (!parseUnsignedInteger(input, decimal)) {
+        return "Number is too large!";
+    }
+
+    if (decimal == 0) {
+        return "0";
+    }
+
+    std::vector<int> octal;
+
+    while (decimal > 0) {
+        int remainder = decimal % 8;
+        octal.push_back(remainder);
+        decimal = decimal / 8;
+    }
+
+    std::string result;
+
+    for (int i = octal.size() - 1; i >= 0; i--) {
+        result += '0' + octal[i];
     }
 
     return result;

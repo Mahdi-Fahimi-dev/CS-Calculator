@@ -32,10 +32,22 @@ std::string convertDecimalToHexadecimal(const std::string& input) {
     return converter.decimalToHexadecimal(input);
 }
 
+std::string convertHexadecimalToDecimal(const std::string& input) {
+    NumberConverter converter;
+    return converter.hexadecimalToDecimal(input);
+}
+
+std::string convertDecimalToOctal(const std::string& input) {
+    NumberConverter converter;
+    return converter.decimalToOctal(input);
+}
+
 EMSCRIPTEN_BINDINGS(cs_calculator) {
     emscripten::function("testConnection", &testConnection);
     emscripten::function("calculateBasic", &calculateBasic);
     emscripten::function("convertDecimalToBinary", &convertDecimalToBinary);
     emscripten::function("convertBinaryToDecimal", &convertBinaryToDecimal);
     emscripten::function("convertDecimalToHexadecimal", &convertDecimalToHexadecimal);
+    emscripten::function("convertHexadecimalToDecimal", &convertHexadecimalToDecimal);
+    emscripten::function("convertDecimalToOctal", &convertDecimalToOctal);
 }
