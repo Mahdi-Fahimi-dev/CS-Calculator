@@ -138,33 +138,16 @@ void NumberConverter::run() {
             std::string binaryNum;
             std::cin >> binaryNum;
 
-            if (!isBinary(binaryNum)) {
+            std::string result = binaryToOctal(binaryNum);
+
+            if (result == "Invalid binary number!") {
                 std::cout << std::endl;
-                std::cout << "Invalid binary number!\n";
+                std::cout << result << std::endl;
                 continue;
             }
 
-            int extraBits = binaryNum.size() % 3;
-            if (extraBits == 1) {
-                binaryNum = "00" + binaryNum;
-            } else if (extraBits == 2) {
-                binaryNum = "0" + binaryNum;
-            }
-
-            std::string octalResult;
-            for (int i = 0; i < binaryNum.size(); i+=3) {
-                int octalDigit = 0;
-                octalDigit += (binaryNum[i] - '0') * 4;
-                octalDigit += (binaryNum[i + 1] - '0') * 2;
-                octalDigit += (binaryNum[i + 2] - '0') * 1;
-                octalResult += octalDigit + '0';
-            }
-            while (octalResult.size() > 1 && octalResult[0] == '0') {
-                octalResult.erase(0, 1);
-            }
-            std::cout << "Binary (" << binaryNum << ") to octal is: ";
-            std::cout << octalResult;
-            std::cout << std::endl;
+            std::cout << "Binary (" << binaryNum << ") to octal is: "
+                << result << std::endl;
 
         // Octal to Binary
         } else if (optionNumber == 7) {
@@ -174,59 +157,16 @@ void NumberConverter::run() {
             std::string octalNum;
             std::cin >> octalNum;
 
-            bool validOctal = true;
+            std::string result = octalToBinary(octalNum);
 
-            // check if the number is between 0 and 7
-            for (int i = 0; i < octalNum.size(); i++) {
-                if (octalNum[i] < '0' || octalNum[i] > '7') {
-                    std::cout << std::endl;
-                    std::cout << "Invalid octal number!\n";
-                    validOctal = false;
-                    break;
-                }
-            }
-
-            if (validOctal == false) { 
+            if (result == "Invalid octal number!") {
+                std::cout << std::endl;
+                std::cout << result << std::endl;
                 continue;
             }
 
-            std::string binaryResult;
-
-            // convert the octal number into its numeric value
-            for (int i = 0; i < octalNum.size(); i++) {
-                int intNumber;
-                intNumber = octalNum[i] - '0';
-                std::string octBinaryNum;
-
-                if (intNumber >= 4) {
-                    octBinaryNum = octBinaryNum + '1';
-                    intNumber = intNumber - 4;
-                } else {
-                    octBinaryNum = octBinaryNum + '0';
-                }
-
-                if (intNumber >= 2) {
-                    octBinaryNum = octBinaryNum + '1';
-                    intNumber = intNumber - 2;
-                } else {
-                    octBinaryNum = octBinaryNum + '0';
-                }
-
-                if (intNumber >= 1) {
-                    octBinaryNum = octBinaryNum + '1';
-                    intNumber = intNumber - 1;
-                } else {
-                    octBinaryNum = octBinaryNum + '0';
-                }
-                binaryResult = binaryResult + octBinaryNum;
-
-            }
-            while (binaryResult.size() > 1 && binaryResult[0] == '0') {
-                binaryResult.erase(0, 1);
-            }
-            std::cout << "Octal (" << octalNum << ") to binary is: ";
-            std::cout << binaryResult;
-            std::cout << std::endl;
+            std::cout << "Octal (" << octalNum << ") to binary is: "
+                << result << std::endl;
                 
         } else if (optionNumber == 8) {
             return;
@@ -411,4 +351,84 @@ std::string NumberConverter::decimalToOctal(const std::string& input) {
     }
 
     return result;
+}
+
+std::string NumberConverter::binaryToOctal(const std::string& input) {
+
+    if (!isBinary(input)) {
+        return "Invalid binary number!";
+    }
+
+    std::string binary = input;
+
+    int extraBits = binary.size() % 3;
+
+    if (extraBits == 1) {
+        binary = "00" + binary;
+    } else if (extraBits == 2) {
+        binary = "0" + binary;
+    }
+
+    std::string octalResult;
+
+    for (int i = 0; i < binary.size(); i += 3) {
+        int octalDigit = 0;
+
+        octalDigit += (binary[i] - '0') * 4;
+        octalDigit += (binary[i + 1] - '0') * 2;
+        octalDigit += (binary[i + 2] - '0');
+
+        octalResult += octalDigit + '0';
+    }
+
+    while (octalResult.size() > 1 && octalResult[0] == '0') {
+        octalResult.erase(0, 1);
+    }
+
+    return octalResult;
+}
+
+std::string NumberConverter::octalToBinary(const std::string& input) {
+
+    // Validate octal number
+    for (int i = 0; i < input.size(); i++) {
+        if (input[i] < '0' || input[i] > '7') {
+            return "Invalid octal number!";
+        }
+    }
+
+    std::string binaryResult;
+
+    for (int i = 0; i < input.size(); i++) {
+        int number = input[i] - '0';
+        std::string binaryDigit;
+
+        if (number >= 4) {
+            binaryDigit += '1';
+            number = number - 4;
+        } else {
+            binaryDigit += '0';
+        }
+
+        if (number >= 2) {
+            binaryDigit += '1';
+            number = number - 2;
+        } else {
+            binaryDigit += '0';
+        }
+
+        if (number >= 1) {
+            binaryDigit += '1';
+        } else {
+            binaryDigit += '0';
+        }
+
+        binaryResult += binaryDigit;
+    }
+
+    while (binaryResult.size() > 1 && binaryResult[0] == '0') {
+        binaryResult.erase(0, 1);
+    }
+
+    return binaryResult;
 }

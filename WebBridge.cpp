@@ -42,6 +42,16 @@ std::string convertDecimalToOctal(const std::string& input) {
     return converter.decimalToOctal(input);
 }
 
+std::string convertBinaryToOctal(const std::string& input) {
+    NumberConverter converter;
+    return converter.binaryToOctal(input);
+}
+
+std::string convertOctalToBinary(const std::string& input) {
+    NumberConverter converter;
+    return converter.octalToBinary(input);
+}
+
 EMSCRIPTEN_BINDINGS(cs_calculator) {
     emscripten::function("testConnection", &testConnection);
     emscripten::function("calculateBasic", &calculateBasic);
@@ -50,4 +60,6 @@ EMSCRIPTEN_BINDINGS(cs_calculator) {
     emscripten::function("convertDecimalToHexadecimal", &convertDecimalToHexadecimal);
     emscripten::function("convertHexadecimalToDecimal", &convertHexadecimalToDecimal);
     emscripten::function("convertDecimalToOctal", &convertDecimalToOctal);
+    emscripten::function("convertBinaryToOctal", &convertBinaryToOctal);
+    emscripten::function("convertOctalToBinary", &convertOctalToBinary);
 }

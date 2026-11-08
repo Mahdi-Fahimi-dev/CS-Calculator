@@ -10,6 +10,8 @@ public:
     std::string decimalToHexadecimal(const std::string& input);
     std::string hexadecimalToDecimal(const std::string& input);
     std::string decimalToOctal(const std::string& input);
+    std::string binaryToOctal(const std::string& input);
+    std::string octalToBinary(const std::string& input);
 
 };
 

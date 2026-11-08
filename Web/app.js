@@ -96,6 +96,12 @@ convertButton.addEventListener("click", function () {
     } else if (conversionType.value === "decimal-octal") {
         conversionResult.value =
             Module.convertDecimalToOctal(conversionInput.value.trim());
+    }  else if (conversionType.value === "binary-octal") {
+        conversionResult.value =
+            Module.convertBinaryToOctal(conversionInput.value.trim());
+    } else if (conversionType.value === "octal-binary") {
+        conversionResult.value =
+            Module.convertOctalToBinary(conversionInput.value.trim());
     }
 });
 
