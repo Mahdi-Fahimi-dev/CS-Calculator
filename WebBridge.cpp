@@ -63,6 +63,11 @@ std::string bitwiseOr(const std::string& first, const std::string& second) {
     return calculator.bitwiseOr(first, second);
 }
 
+std::string bitwiseXor(const std::string& first, const std::string& second) {
+    BitwiseCalculator calculator;
+    return calculator.bitwiseXor(first, second);
+}
+
 EMSCRIPTEN_BINDINGS(cs_calculator) {
     emscripten::function("testConnection", &testConnection);
     emscripten::function("calculateBasic", &calculateBasic);
@@ -75,4 +80,5 @@ EMSCRIPTEN_BINDINGS(cs_calculator) {
     emscripten::function("convertOctalToBinary", &convertOctalToBinary);
     emscripten::function("bitwiseAnd", &bitwiseAnd);
     emscripten::function("bitwiseOr", &bitwiseOr);
+    emscripten::function("bitwiseXor", &bitwiseXor);
 }

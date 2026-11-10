@@ -7,5 +7,6 @@ public:
     void run();
     std::string bitwiseAnd(const std::string& first, const std::string& second);
     std::string bitwiseOr(const std::string& first, const std::string& second);
+    std::string bitwiseXor(const std::string& first, const std::string& second);
 };
 #endif

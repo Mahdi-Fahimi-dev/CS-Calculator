@@ -115,38 +115,30 @@ void BitwiseCalculator::run() {
             std::cout << std::endl;
             std::cout << "XOR Operation Selected\n";
             std::cout << "Enter first binary number: ";
-            std::string binaryOne;
+            std::string binaryOne;      // first binary number for XOR operation
             std::cin >> binaryOne;
 
             // checks if the number is 0 or 1
             if (!isBinary(binaryOne)) {
+                std::cout << std::endl;
                 std::cout << "Invalid binary number!\n";
                 continue;
             }
 
             std::cout << "Enter second binary number: ";
-            std::string binaryTwo;
+            std::string binaryTwo;      // Second binary number for XOR operation
             std::cin >> binaryTwo;
 
             // checks if the number is 0 or 1
             if (!isBinary(binaryTwo)) {
+                std::cout << std::endl;
                 std::cout << "Invalid binary number!\n";
                 continue;
             }
 
-            // makes the two binary number the same length by adding leading 0 if one is shorter
+            std::string result = bitwiseXor(binaryOne, binaryTwo);
+
             padBinaryStrings(binaryOne, binaryTwo);
-
-            std::string xorResult;      // result of the XOR operation
-
-            // do XOR operation
-            for (int i = 0; i < binaryOne.size(); i++) {
-                if (binaryOne[i] != binaryTwo[i]) {
-                    xorResult = xorResult + '1';
-                } else {
-                    xorResult = xorResult + '0';
-                }
-            }
 
             // Prints the result
             std::cout << std::endl;
@@ -154,7 +146,7 @@ void BitwiseCalculator::run() {
             std::cout << "XOR" << std::endl;
             std::cout << "      " << binaryTwo << std::endl;
             std::cout << "-----------------------" << std::endl;
-            std::cout << "      " << xorResult << std::endl;
+            std::cout << "      " << result << std::endl;
 
         // NOT Operation
         } else if (selectOption == 4) {
@@ -382,6 +374,31 @@ std::string BitwiseCalculator::bitwiseOr(const std::string& first, const std::st
 
     for (int i = 0; i < firstBinary.size(); i++) {
         if (firstBinary[i] == '1' || secondBinary[i] == '1') {
+            result += '1';
+        } else {
+            result += '0';
+        }
+    }
+
+    return result;
+}
+
+// XOR
+std::string BitwiseCalculator::bitwiseXor(const std::string& first, const std::string& second) {
+
+    if (!isBinary(first) || !isBinary(second)) {
+        return "Invalid binary number!";
+    }
+
+    std::string firstBinary = first;
+    std::string secondBinary = second;
+
+    padBinaryStrings(firstBinary, secondBinary);
+
+    std::string result;
+
+    for (int i = 0; i < firstBinary.size(); i++) {
+        if (firstBinary[i] != secondBinary[i]) {
             result += '1';
         } else {
             result += '0';

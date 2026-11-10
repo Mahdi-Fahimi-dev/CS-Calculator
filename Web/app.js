@@ -153,7 +153,12 @@ bitwiseCalculateButton.addEventListener("click", function () {
     /* OR Operation */
     else if (operation === "or") {
         bitwiseResult.value = Module.bitwiseOr(firstInput, secondInput);
-}
+    }
+
+    /* XOR Operation */
+    else if (operation === "xor") {
+        bitwiseResult.value = Module.bitwiseXor(firstInput, secondInput);
+    }
 });
 
 /* Two's Complement */
