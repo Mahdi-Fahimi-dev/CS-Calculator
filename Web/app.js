@@ -30,6 +30,9 @@ const bitwiseSecondInput = document.getElementById("bitwise-second-input");
 
 const bitwiseFirstInput = document.getElementById("bitwise-first-input");
 
+const bitwiseCalculateButton = document.getElementById("bitwise-calculate-button");
+const bitwiseResult = document.getElementById("bitwise-result");
+
 /* Two's Complement */
 const twosButton = document.getElementById("twos-button");
 const twosComplement = document.getElementById("twos-complement");
@@ -134,6 +137,16 @@ bitwiseOperation.addEventListener("change", function () {
         bitwiseFirstInput.placeholder = "Enter first binary number";
         bitwiseSecondInput.hidden = false;
         bitwiseSecondInput.placeholder = "Enter second binary number";
+    }
+});
+
+bitwiseCalculateButton.addEventListener("click", function () {
+    const operation = bitwiseOperation.value;
+    const firstInput = bitwiseFirstInput.value.trim();
+    const secondInput = bitwiseSecondInput.value.trim();
+
+    if (operation === "and") {
+        bitwiseResult.value = Module.bitwiseAnd(firstInput, secondInput);
     }
 });
 
