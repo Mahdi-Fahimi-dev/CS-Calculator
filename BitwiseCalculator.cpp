@@ -83,6 +83,7 @@ void BitwiseCalculator::run() {
 
             // checks if the number is 0 or 1
             if (!isBinary(binaryNum1)) {
+                std::cout << std::endl;
                 std::cout << "Invalid binary number!\n";
                 continue;
             }
@@ -93,31 +94,21 @@ void BitwiseCalculator::run() {
 
             // checks if the number is 0 or 1
             if (!isBinary(binaryNum2)) {
+                std::cout << std::endl;
                 std::cout << "Invalid binary number!\n";
                 continue;
             }
 
-            // makes the two binary number the same length by adding leading 0 if one is shorter
+            std::string result = bitwiseOr(binaryNum1, binaryNum2);
+
             padBinaryStrings(binaryNum1, binaryNum2);
 
-            std::string orResult;      // result of the OR operation
-
-            // do OR operation
-            for (int i = 0; i < binaryNum1.size(); i++) {
-                if (binaryNum1[i] == '1' || binaryNum2[i] == '1') {
-                    orResult = orResult + '1';
-                } else {
-                    orResult = orResult + '0';
-                }
-            }
-
-            // Prints the result
             std::cout << std::endl;
             std::cout << "      " << binaryNum1 << std::endl;
             std::cout << "OR" << std::endl;
             std::cout << "      " << binaryNum2 << std::endl;
             std::cout << "-----------------------" << std::endl;
-            std::cout << "      " << orResult << std::endl;
+            std::cout << "      " << result << std::endl;
         
         // XOR Operation
         } else if (selectOption == 3) {
@@ -366,6 +357,31 @@ std::string BitwiseCalculator::bitwiseAnd(const std::string& first, const std::s
 
     for (int i = 0; i < firstBinary.size(); i++) {
         if (firstBinary[i] == '1' && secondBinary[i] == '1') {
+            result += '1';
+        } else {
+            result += '0';
+        }
+    }
+
+    return result;
+}
+
+// OR
+std::string BitwiseCalculator::bitwiseOr(const std::string& first, const std::string& second) {
+
+    if (!isBinary(first) || !isBinary(second)) {
+        return "Invalid binary number!";
+    }
+
+    std::string firstBinary = first;
+    std::string secondBinary = second;
+
+    padBinaryStrings(firstBinary, secondBinary);
+
+    std::string result;
+
+    for (int i = 0; i < firstBinary.size(); i++) {
+        if (firstBinary[i] == '1' || secondBinary[i] == '1') {
             result += '1';
         } else {
             result += '0';

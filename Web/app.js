@@ -145,9 +145,15 @@ bitwiseCalculateButton.addEventListener("click", function () {
     const firstInput = bitwiseFirstInput.value.trim();
     const secondInput = bitwiseSecondInput.value.trim();
 
+    /* AND Operation */
     if (operation === "and") {
         bitwiseResult.value = Module.bitwiseAnd(firstInput, secondInput);
     }
+
+    /* OR Operation */
+    else if (operation === "or") {
+        bitwiseResult.value = Module.bitwiseOr(firstInput, secondInput);
+}
 });
 
 /* Two's Complement */
