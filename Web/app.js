@@ -158,6 +158,16 @@ bitwiseCalculateButton.addEventListener("click", function () {
     /* XOR Operation */
     else if (operation === "xor") {
         bitwiseResult.value = Module.bitwiseXor(firstInput, secondInput);
+    } 
+    
+    /* NOT Operation */
+    else if (operation === "not") {
+        bitwiseResult.value = Module.bitwiseNot(firstInput);
+    }
+
+    /* Left Shift Operation */
+    else if (operation === "left-shift") {
+        bitwiseResult.value = Module.bitwiseLeftShift(firstInput, secondInput);
     }
 });
 

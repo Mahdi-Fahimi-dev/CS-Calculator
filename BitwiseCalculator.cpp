@@ -159,14 +159,14 @@ void BitwiseCalculator::run() {
 
             // checks if the number is 0 or 1
             if (!isBinary(number)) {
+                std::cout << std::endl;
                 std::cout << "Invalid binary number!\n";
                 continue;
             }
             
-            std::string notResult = invertBinary(number);
+            std::string notResult = bitwiseNot(number);
 
             // Prints the result
-            std::cout << std::endl;
             std::cout << "NOT(" << number << ") -> " << notResult;
             std::cout << std::endl;
 
@@ -181,6 +181,7 @@ void BitwiseCalculator::run() {
 
             // checks if the number is 0 or 1
             if (!isBinary(binaryNumber)) {
+                std::cout << std::endl;
                 std::cout << "Invalid binary number!\n";
                 continue;
             }
@@ -190,28 +191,19 @@ void BitwiseCalculator::run() {
             std::cin >> shiftInput;
 
             if (!isNonNegativeInteger(shiftInput)) {
+                std::cout << std::endl;
                 std::cout << "Invalid input!\n";
                 continue;
             }
 
             unsigned long long shiftAmount;
             if (!parseShiftAmount(shiftInput, shiftAmount)) {
+                std::cout << std::endl;
                 std::cout << "Shift amount is too large! Maximum is 1024.\n";
                 continue;
             }
 
-            // prints the original input if the shift amount is 0
-            if (shiftAmount == 0) {
-                std::cout << std::endl;
-                std::cout << binaryNumber << ", left shift (" << shiftAmount << ") -> " << binaryNumber << std::endl;
-                continue;
-            }
-
-            // add zeros to the end of the shift result based on the shift amount
-            std::string shiftResult = binaryNumber;
-            for (unsigned long long i = 0; i < shiftAmount; i++) {
-                shiftResult = shiftResult + '0';
-            }
+            std::string shiftResult = bitwiseLeftShift(binaryNumber, shiftInput);
 
             // Prints the result
             std::cout << std::endl;
@@ -403,6 +395,42 @@ std::string BitwiseCalculator::bitwiseXor(const std::string& first, const std::s
         } else {
             result += '0';
         }
+    }
+
+    return result;
+}
+
+// NOT
+std::string BitwiseCalculator::bitwiseNot(const std::string& input) {
+
+    if (!isBinary(input)) {
+        return "Invalid binary number!";
+    }
+
+    return invertBinary(input);
+}
+
+// Shift Left
+std::string BitwiseCalculator::bitwiseLeftShift(const std::string& input, const std::string& shiftInput) {
+
+    if (!isBinary(input)) {
+        return "Invalid binary number!";
+    }
+
+    if (!isNonNegativeInteger(shiftInput)) {
+        return "Invalid input!";
+    }
+
+    unsigned long long shiftAmount;
+
+    if (!parseShiftAmount(shiftInput, shiftAmount)) {
+        return "Shift amount is too large! Maximum is 1024.";
+    }
+
+    std::string result = input;
+
+    for (unsigned long long i = 0; i < shiftAmount; i++) {
+        result += '0';
     }
 
     return result;
