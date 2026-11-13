@@ -2,6 +2,7 @@
 #include "BasicCalculator.h"
 #include "NumberConverter.h"
 #include "BitwiseCalculator.h"
+#include "TwosComplement.h"
 #include <string>
 
 int testConnection() {
@@ -94,6 +95,11 @@ std::string bitwiseArithmeticRightShift(
     return calculator.bitwiseArithmeticRightShift(input, shiftInput);
 }
 
+std::string calculateTwosComplement(const std::string& input) {
+    TwosComplement calculator;
+    return calculator.calculateTwosComplement(input);
+}
+
 EMSCRIPTEN_BINDINGS(cs_calculator) {
     emscripten::function("testConnection", &testConnection);
     emscripten::function("calculateBasic", &calculateBasic);
@@ -111,4 +117,5 @@ EMSCRIPTEN_BINDINGS(cs_calculator) {
     emscripten::function("bitwiseLeftShift", &bitwiseLeftShift);
     emscripten::function("bitwiseLogicalRightShift", &bitwiseLogicalRightShift);
     emscripten::function("bitwiseArithmeticRightShift", &bitwiseArithmeticRightShift);
+    emscripten::function("calculateTwosComplement", &calculateTwosComplement);
 }

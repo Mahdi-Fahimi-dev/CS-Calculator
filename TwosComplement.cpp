@@ -17,6 +17,7 @@ void TwosComplement::run() {
 
         // Input Validation
         if (choiceInput != "1" && choiceInput != "2") {
+            std::cout << std::endl;
             std::cout << "Invalid Choice!\n";
             continue;
         }
@@ -32,26 +33,39 @@ void TwosComplement::run() {
 
             // checks if the number is 0 or 1
             if (!isBinary(inputInBinary)) {
+                std::cout << std::endl;
                 std::cout << "Invalid binary number!\n";
                 continue;
             }
 
-            std::string invertedBits = invertBinary(inputInBinary);
+            std::string result = calculateTwosComplement(inputInBinary);
 
-            for (int i = invertedBits.size() - 1; i >= 0; i--) {
-                if (invertedBits[i] == '0') {
-                    invertedBits[i] = '1';
-                    break;
-                } else {
-                    invertedBits[i] = '0';
-                }
-            }
-
-            std::cout << inputInBinary << ", 2's complement -> " << invertedBits << std::endl;
+            std::cout << std::endl;
+            std::cout << inputInBinary << ", 2's complement -> " << result << std::endl;
 
         } else {
             return;
         }
    }
+}
+
+std::string TwosComplement::calculateTwosComplement(const std::string& input) {
+
+    if (!isBinary(input)) {
+        return "Invalid binary number!";
+    }
+
+    std::string result = invertBinary(input);
+
+    for (int i = result.size() - 1; i >= 0; i--) {
+        if (result[i] == '0') {
+            result[i] = '1';
+            break;
+        } else {
+            result[i] = '0';
+        }
+    }
+
+    return result;
 }
  

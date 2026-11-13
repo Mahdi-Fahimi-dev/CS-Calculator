@@ -38,6 +38,10 @@ const twosButton = document.getElementById("twos-button");
 const twosComplement = document.getElementById("twos-complement");
 const twosBackButton = document.getElementById("twos-back-button");
 
+const twosInput = document.getElementById("twos-input");
+const twosCalculateButton = document.getElementById("twos-calculate-button");
+const twosResult = document.getElementById("twos-result");
+
 
 /* Basic Calculator */
 basicButton.addEventListener("click", function () {
@@ -210,4 +214,10 @@ calculateButton.addEventListener("click", function () {
 
     basicResult.value =
         Module.calculateBasic(first, operatorInput.value, second);
+});
+
+twosCalculateButton.addEventListener("click", function () {
+    const input = twosInput.value.trim();
+
+    twosResult.value = Module.calculateTwosComplement(input);
 });
