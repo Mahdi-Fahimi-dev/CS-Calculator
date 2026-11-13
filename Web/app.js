@@ -169,6 +169,15 @@ bitwiseCalculateButton.addEventListener("click", function () {
     else if (operation === "left-shift") {
         bitwiseResult.value = Module.bitwiseLeftShift(firstInput, secondInput);
     }
+
+    /* Logical Right Shift Operation */
+    else if (operation === "logical-right-shift") {
+        bitwiseResult.value = Module.bitwiseLogicalRightShift(firstInput, secondInput);
+    }
+
+    /* Arithmetic Right Shift Operation */
+    else if (operation === "arithmetic-right-shift") {
+        bitwiseResult.value = Module.bitwiseArithmeticRightShift(firstInput, secondInput);}
 });
 
 /* Two's Complement */

@@ -78,6 +78,22 @@ std::string bitwiseLeftShift(const std::string& input, const std::string& shiftI
     return calculator.bitwiseLeftShift(input, shiftInput);
 }
 
+std::string bitwiseLogicalRightShift(
+    const std::string& input,
+    const std::string& shiftInput) {
+
+    BitwiseCalculator calculator;
+    return calculator.bitwiseLogicalRightShift(input, shiftInput);
+}
+
+std::string bitwiseArithmeticRightShift(
+    const std::string& input,
+    const std::string& shiftInput) {
+
+    BitwiseCalculator calculator;
+    return calculator.bitwiseArithmeticRightShift(input, shiftInput);
+}
+
 EMSCRIPTEN_BINDINGS(cs_calculator) {
     emscripten::function("testConnection", &testConnection);
     emscripten::function("calculateBasic", &calculateBasic);
@@ -93,4 +109,6 @@ EMSCRIPTEN_BINDINGS(cs_calculator) {
     emscripten::function("bitwiseXor", &bitwiseXor);
     emscripten::function("bitwiseNot", &bitwiseNot);
     emscripten::function("bitwiseLeftShift", &bitwiseLeftShift);
+    emscripten::function("bitwiseLogicalRightShift", &bitwiseLogicalRightShift);
+    emscripten::function("bitwiseArithmeticRightShift", &bitwiseArithmeticRightShift);
 }
