@@ -25,13 +25,25 @@ button {
 
 #basic-calculator input,
 #basic-calculator select,
-#basic-calculator button,
+#basic-calculator button {
+    height: 40px;
+    box-sizing: border-box;
+    vertical-align: middle;
+}
 #converter input,
 #converter select,
-#converter button,
+#converter button {
+    height: 40px;
+    box-sizing: border-box;
+    vertical-align: middle;
+}
 #bitwise-calculator input,
 #bitwise-calculator select,
-#bitwise-calculator button,
+#bitwise-calculator button {
+    height: 40px;
+    box-sizing: border-box;
+    vertical-align: middle;
+}
 #twos-complement input,
 #twos-complement select,
 #twos-complement button {

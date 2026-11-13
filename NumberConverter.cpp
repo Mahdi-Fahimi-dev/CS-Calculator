@@ -178,6 +178,7 @@ void NumberConverter::run() {
 
 }
 
+// Decimal to Binary
 std::string NumberConverter::decimalToBinary(const std::string& input) {
 
     if (!isNonNegativeInteger(input)) {
@@ -211,6 +212,7 @@ std::string NumberConverter::decimalToBinary(const std::string& input) {
     return result;
 }
 
+// Binary to Decimal
 std::string NumberConverter::binaryToDecimal(const std::string& input) {
 
     if (!isBinary(input)) {
@@ -234,6 +236,7 @@ std::string NumberConverter::binaryToDecimal(const std::string& input) {
     return std::to_string(result);
 }
 
+// Decimal to Hexadecimal
 std::string NumberConverter::decimalToHexadecimal(const std::string& input) {
 
     if (!isNonNegativeInteger(input)) {
@@ -276,14 +279,17 @@ std::string NumberConverter::decimalToHexadecimal(const std::string& input) {
     return result;
 }
 
+// Hexadecimal to Decimal
 std::string NumberConverter::hexadecimalToDecimal(const std::string& input) {
-
+    if (input.empty()) {
+        return "Invalid hex number!";
+    }
     // Validate hexadecimal number
     for (int i = 0; i < input.size(); i++) {
         if (!((input[i] >= '0' && input[i] <= '9') ||
               (input[i] >= 'A' && input[i] <= 'F') ||
               (input[i] >= 'a' && input[i] <= 'f'))) {
-            return "Invalid hexadecimal number!";
+            return "Invalid hex number!";
         }
     }
 
@@ -320,6 +326,7 @@ std::string NumberConverter::hexadecimalToDecimal(const std::string& input) {
     return std::to_string(result);
 }
 
+// Decimal to Octal
 std::string NumberConverter::decimalToOctal(const std::string& input) {
 
     if (!isNonNegativeInteger(input)) {
@@ -353,6 +360,7 @@ std::string NumberConverter::decimalToOctal(const std::string& input) {
     return result;
 }
 
+// Binary to Octal
 std::string NumberConverter::binaryToOctal(const std::string& input) {
 
     if (!isBinary(input)) {
@@ -388,7 +396,11 @@ std::string NumberConverter::binaryToOctal(const std::string& input) {
     return octalResult;
 }
 
+// Octal to Binary
 std::string NumberConverter::octalToBinary(const std::string& input) {
+    if (input.empty()) {
+        return "Invalid octal number!";
+    }
 
     // Validate octal number
     for (int i = 0; i < input.size(); i++) {
