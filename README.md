@@ -3,14 +3,14 @@ A C++ calculator designed for computer science students, with both a terminal ve
 
 ## Live Demo
 
-Try the web version here:
+**Try the web version here:**
 https://mahdi-fahimi-dev.github.io/CS-Calculator/
 
 ## Features
 
-Basic Calculator
+### Basic Calculator
 
-Supports:
+**Supports:**
     - Addition
     - Subtraction
     - Multiplication
@@ -19,9 +19,9 @@ Supports:
 
 Includes input validation and division/modulo-by-zero handling.
 
-Number System Converter
+### Number System Converter
 
-Supports:
+**Supports:**
     - Decimal to Binary
     - Binary to Decimal
     - Decimal to Hexadecimal
@@ -32,9 +32,9 @@ Supports:
 
 The converter includes validation for invalid numbers and values that exceed the supported range.
 
-Bitwise Calculator
+### Bitwise Calculator
 
-Supports:
+**Supports:**
     - AND
     - OR
     - XOR
@@ -43,13 +43,13 @@ Supports:
     - Logical Right Shift
     - Arithmetic Right Shift
 
-NOTE: Left shift uses unbounded-width binary values. Bits are not discarded when they move beyond a fixed width such as 8-bit or 32-bit. The result grows as needed.
+**NOTE:** Left shift uses unbounded-width binary values. Bits are not discarded when they move beyond a fixed width such as 8-bit or 32-bit. The result grows as needed.
 
-2's Complement
+### 2's Complement
 
 Finds the 2's complement of a binary number.
 
-NOTE: The bit width entered by the user is preserved. For example, '0001' is treated as a 4-bit value and becomes '1111', while '00000001' is treated as an 8-bit value and becomes '11111111'.
+**NOTE:** The bit width entered by the user is preserved. For example, '0001' is treated as a 4-bit value and becomes '1111', while '00000001' is treated as an 8-bit value and becomes '11111111'.
 
 ## Web Version
 
@@ -70,19 +70,19 @@ The web interface was developed with assistance from AI for guidance while learn
 
 ## Running the Terminal Version
 
-Clone the repository:
+**Clone the repository:**
 
     git clone https://github.com/Mahdi-Fahimi-dev/CS-Calculator.git
 
-Go into the project folder:
+**Go into the project folder:**
 
     cd CS-Calculator
 
-Compile:
+**Compile:**
 
     g++ main.cpp BasicCalculator.cpp NumberConverter.cpp BitwiseCalculator.cpp TwosComplement.cpp InputValidator.cpp BinaryHelper.cpp -o calculator
 
-Run on Windows:
+**Run on Windows:**
 
     .\calculator.exe
 
